@@ -23,7 +23,7 @@ See [Google Client Login documentation][2] for details.
     var config = {
         user: 'bla-blah-blah@gmail.com',
         password: 'your-huge-very-very-strong-password',
-        source: 'company.app.name', 
+        source: 'com.company.app-name',
     };
     var c2dm = new C2DM(config);
 
@@ -33,7 +33,7 @@ See [Google Client Login documentation][2] for details.
         // err - error, received from Google ClientLogin api
         // token - Auth token
     });
-
+    
 ### Send message to device
 See [C2DM documentation][3] for details.
 
@@ -46,11 +46,11 @@ See [C2DM documentation][3] for details.
     };
     
     c2dm.send(message, function(err, messageId){
-      if (err) {
-        console.log("Something has gone wrong!");
-      } else {
-        console.log("Sent with message ID: ", messageId);
-      }
+        if (err) {
+            console.log("Something has gone wrong!");
+        } else {
+            console.log("Sent with message ID: ", messageId);
+        }
     });
 
 ### Avoiding login procedure
@@ -90,10 +90,9 @@ You should get back the header details along with a message id if sending has be
     < X-XSS-Protection: 1; mode=block
     < Server: GSE
     < Transfer-Encoding: chunked
-    < 
+    <
     id=0:1326885481081626%900b347100019e5f
     .... more SSL stuff ....
-
 
 ### Keep-alive connection
 This module supports Connection: keep-alive header too keep connection to c2dm gate established. You could use it by simply including property in config:
@@ -107,9 +106,6 @@ This module supports Connection: keep-alive header too keep connection to c2dm g
 ## Credits
 
 Written and maintained by [Yury Proshchenko][5].
-
-Contributors:
-[Sam Lown][6].
 
 ## License
 
@@ -128,9 +124,17 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 [3]: http://code.google.com/android/c2dm/index.html#push
 [4]: http://github.com/isaacs/npm
 [5]: mailto:spect.man@gmail.com
-[6]: http://www.samlown.com
 
 ## Changelog
+
+1.1.0
+
+ - [#2](http://github.com/SpeCT/node-c2dm/issues/2) – Exponential backoff retry on quota and temporary errors (thanks Olivier Poitrey aka [rs](https://github.com/rs))
+ - Handle auth_token refresh (Update-Client-Auth header) (thanks [Sam Lown](https://github.com/samlown))
+
+1.0.4
+
+  - Handle scenario where 'close' event is emitted before 'end' event (node 0.4.x)
 
 1.0.3
 
